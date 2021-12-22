@@ -26,7 +26,7 @@
 <body>
 
 <!-- Navigation -->
-@include('layouts.partials.navigations')
+@include('layouts.partials.navigation')
 
 <!-- Page Header -->
 
