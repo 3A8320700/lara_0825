@@ -28,12 +28,23 @@ Route::get('/', function () {
     $posts = Post::all();//取出posts資料表所有貼文
     dd($posts);//dd=data dump，將變數內容倒出，並停止程式執行
 //使用find方法
-    $post = Post::find(1);//找尋posts資料表id=1的貼文
+    $post = Post::find(11);//找尋posts資料表id=1的貼文
     dd($post);
 //練習條件式
-    $posts = Post::where('id','<',10)->orderby('id','DESC')->get();//查詢符合條件的貼文，排序後取出
+    $posts = Post::where('id','>',10)->orderby('id','DESC')->get();//查詢符合條件的貼文，排序後取出
     dd($posts);
 //return view('welcome');
+//使用update方法
+    $post = Post::find(1);
+    $post -> update([
+        'title'=>'updated title',
+        'content'=>'updated content',
+    ]);
+//使用save方法
+    $post=Post::find(1);
+    $post ->title='saved title';
+    $post ->content='saved content';
+    $post ->save();
 });
 
 Route::get('posts',[PostsController::class,'index'])->name('posts.index');
