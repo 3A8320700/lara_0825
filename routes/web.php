@@ -1,4 +1,5 @@
 <?php
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostsController;
 use App\Models\Post;
@@ -13,6 +14,7 @@ use App\Models\Comment;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::get('/', function () {
     /* 新增資料
     $post=new Post();//先產生Post的物件$post，$post代表資料表posts的一篇貼文
@@ -49,14 +51,15 @@ Route::get('/', function () {
     $post->content = 'saved content';
     $post->save();
     */
+    //使用delete方法
     /* 刪除資料
-     $post = Post::find(11);
-     $post->delete();
-     //使用destroy方法
-     Post::destroy(12);
-     //刪除多筆資料
-     Post::destroy(13,14,15);
-     */
+    $post = Post::find(11);
+    $post->delete();
+    //使用destroy方法
+    Post::destroy(12);
+    //刪除多筆資料
+    Post::destroy(13,14,15);
+    */
     /*了解 Model 和 Collection 的差異
     //取得Collection，多筆貼文的集合
     $allPosts = Post::all();
@@ -69,16 +72,29 @@ Route::get('/', function () {
     $lastPost = Post::orderby('id','DESC')->first();
     dd($lastPost);
     */
-    /* 透過關聯將資料印出來 */
+    /*透過關聯將資料印出來
     $post=Post::find(17);
     echo $post->title.'<br><hr>';
     foreach ($post->comments as $comment){
         echo $comment->content.'<br>';
     }
-    //return view('welcome');
+*/
+    //透過post關係，擷取posts資料
+    $comment=Comment::find(1);
+    echo $comment->content.'<br>';
+    $post=$comment->post;
+    echo $post->id.'<br>';
+    echo $post->title.'<br>';
+    echo $post->content.'<br>';
+
+   // return view('welcome');
 });
 
 Route::get('posts',[PostsController::class,'index'])->name('posts.index');
+
 Route::get('post',[PostsController::class,"show"])->name('posts.show');
+
 Route::get('about',[PostsController::class,'about'])->name('posts.about');
+
 Route::get('contact',[PostsController::class,'contact'])->name('posts.contact');
+
