@@ -87,7 +87,7 @@ Route::get('/', function () {
     echo $post->title.'<br>';
     echo $post->content.'<br>';
 
-   // return view('welcome');
+  // return view('welcome');
 });
 
 Route::get('posts',[PostsController::class,'index'])->name('posts.index');
